@@ -226,6 +226,27 @@ Before submitting:
    - Brief description of your implementation
    - Test results (k6 output summary)
 
+## Test Environment
+
+All benchmarks were conducted on the following system:
+
+```
+OS: Fedora Linux 42 (KDE Plasma Desktop Edition) x86_64
+Host: LENOVO LNVNB161216
+Kernel: 6.15.7-200.fc42.x86_64
+CPU: 12th Gen Intel i5-12450HX (12) @ 4.400GHz
+GPU: NVIDIA GeForce RTX 4050 Max-Q / Mobile
+GPU: Intel Alder Lake-S [UHD Graphics]
+Memory: 7814MiB / 15705MiB
+```
+
+**Hardware Specifications:**
+- **Processor**: Intel Core i5-12450HX (12 cores, up to 4.4 GHz)
+- **RAM**: 16 GB
+- **Graphics**: NVIDIA RTX 4050 Max-Q + Intel UHD Graphics
+- **Operating System**: Fedora Linux 42
+- **Kernel**: 6.15.7-200.fc42.x86_64
+
 ## Benchmark Results
 
 > **📊 For detailed metrics and complete results, see [RESULTS.md](RESULTS.md)**
