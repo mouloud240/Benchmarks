@@ -251,7 +251,7 @@ Results from running all tests will be documented here after sufficient implemen
 
 For questions, suggestions, or contributions, feel free to reach out:
 
-**Email**: mouloudhasrane@gmail.com
+**Email**: mouloudhasrane@gmail.com/bouorumanamoundher@gmail.com
 
 ## License
 
