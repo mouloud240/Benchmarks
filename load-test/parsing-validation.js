@@ -27,11 +27,16 @@ export default function () {
   };
 
   const headers = { 'Content-Type': 'application/json' };
-  const res = http.post(`${BASE_URL}/api/v1/greetings/`, JSON.stringify(payload), { headers });
+  const res = http.post(`${BASE_URL}/api/v1/greetings`, JSON.stringify(payload), { headers });
 
   check(res, {
     'status is 2xx': (r) => r.status >= 200 && r.status < 300,
   });
+
+    if (res.status >= 400) {
+    console.error(`Error response [${res.status}]: ${res.body}`);
+  }
+
 
   sleep(0.3);
 }

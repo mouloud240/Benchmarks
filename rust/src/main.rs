@@ -4,7 +4,7 @@ use axum::{
 };
 use serde::{Deserialize, Serialize};
 use std::net::SocketAddr;
-use chrono::NaiveDate;
+use chrono::{DateTime, Utc};
 
 
 #[derive(Serialize)]
@@ -54,7 +54,7 @@ struct ValidationSchema {
     id: i32,
     name: String,
     message: Option<String>,
-    greetDate: NaiveDate,
+    greetDate: DateTime<Utc>,
 }
 
 async fn validate_data(Json(data): Json<ValidationSchema>) -> Json<serde_json::Value> {

@@ -228,15 +228,32 @@ Before submitting:
 
 ## Benchmark Results
 
-Results from running all tests will be documented here after sufficient implementations are added.
+> **📊 For detailed metrics and complete results, see [RESULTS.md](RESULTS.md)**
 
-| Framework | Plain Text (avg) | Plain Text (p95) | Parsing & Validation (avg) | Parsing & Validation (p95) |
-|-----------|------------------|------------------|----------------------------|---------------------------|
-| Go        | TBD              | TBD              | TBD                        | TBD                       |
-| FastAPI   | TBD              | TBD              | TBD                        | TBD                       |
-| Django    | TBD              | TBD              | TBD                        | TBD                       |
-| NestJS    | TBD              | TBD              | TBD                        | TBD                       |
-| Rust      | Coming Soon      | Coming Soon      | Coming Soon                | Coming Soon               |
+### Summary Table
+
+| Framework | Plain JSON Response |  | JSON Parsing & Validation |  |
+|-----------|---------------------|--|---------------------------|--|
+|           | **Avg Duration** | **p95 / Req/s** | **Avg Duration** | **p95 / Req/s** |
+| **Rust (Axum)** | 9.84 ms | 48 ms / 16,459 req/s | 18.89 ms | 85.11 ms / 14,648 req/s |
+| **Golang** | 24.54 ms | 100.01 ms / 13,753 req/s | 41.92 ms | 186.04 ms / 11,431 req/s |
+| **NestJS (Fastify)** | 113.84 ms | 485.8 ms / 13,254 req/s | 407.14 ms | 525.46 ms / 7,650 req/s |
+| **FastAPI** | 1.51 s | 3.25 s / 3,076 req/s | 2.06 s | 4.74 s / 2,376 req/s |
+| **Laravel** | 9.51 s ⚠️ | 60s / 529 req/s | 10.9 s ⚠️ | 60s / 467 req/s |
+| **Django** | 33.37 s ⚠️ | 60s / 166 req/s | 33.15 s ⚠️ | 60s / 163 req/s |
+
+**Legend:**
+- ⚠️ = Failed to meet thresholds (high error rate or timeout issues)
+- **p95** = 95th percentile response time
+- **Req/s** = Requests per second (throughput)
+
+### Key Findings
+
+1. **🏆 Winner: Rust (Axum)** - Fastest average and p95 response times in both scenarios
+2. **🥈 Runner-up: Golang** - Excellent performance with minimal overhead
+3. **🥉 Third Place: NestJS (Fastify)** - Best performing Node.js framework, competitive throughput
+4. **FastAPI** - Moderate performance, suitable for Python ecosystem
+5. **Laravel & Django** - Struggled under high load with significant timeout issues
 
 ## Guidelines for Fair Comparison
 
