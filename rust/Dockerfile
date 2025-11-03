@@ -10,17 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pkg-config libssl-dev ca-certificates build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy manifests for caching
-COPY Cargo.toml ./
-
-# Prepare a small dummy crate so Docker can cache dependency compilation
-RUN mkdir src && echo "fn main() {}" > src/main.rs
-
-# Generate lockfile (if one isn't present) and build dependencies to cache them
-RUN cargo generate-lockfile
-RUN cargo build --release
-
-# Copy actual source and build the real binary
+# Copy the full project and build
+COPY Cargo.toml Cargo.lock ./
 COPY src ./src
 RUN cargo build --release
 
