@@ -8,19 +8,33 @@ RUN apk add --no-cache bash git unzip libzip-dev oniguruma-dev icu-dev && \
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Create Laravel project
+# Set working directory
 WORKDIR /app
-RUN composer create-project --no-dev --prefer-dist laravel/laravel:^11.0 . && \
+
+# Copy composer files first for better layer caching
+COPY composer.json composer.lock ./
+
+# Install PHP dependencies (production only)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+
+# Copy the entire Laravel application
+COPY . .
+
+# Set up environment file for production
+RUN cp .env.example .env && \
+    php artisan key:generate && \
     php -r "file_put_contents('.env', str_replace('APP_ENV=local', 'APP_ENV=production', file_get_contents('.env')));" && \
     php -r "file_put_contents('.env', str_replace('APP_DEBUG=true', 'APP_DEBUG=false', file_get_contents('.env')));"
 
-# Copy our routes and controller overriding defaults
-COPY routes/api.php /app/routes/api.php
-COPY app/Http/Controllers/GreetingsController.php /app/app/Http/Controllers/GreetingsController.php
+# Create SQLite database file
+RUN touch database/database.sqlite
 
-# Optimize autoload and config cache for better performance
-RUN php artisan route:cache && \
-    php artisan config:cache && \
+# Run migrations
+RUN php artisan migrate --force
+
+# Optimize for production
+RUN php artisan config:cache && \
+    php artisan route:cache && \
     php artisan view:cache
 
 # Expose the port and run PHP built-in server

@@ -17,12 +17,12 @@ class GreetingsController extends Controller
         $validated = $request->validate([
             'id' => ['required', 'integer'],
             'name' => ['required', 'string'],
-            'message' => ['required', 'string'],
-            'greetDate' => ['required', 'date_format:c'],
+            'message' => ['nullable', 'string'],
+            'greetDate' => ['required', 'date'],
         ]);
 
         return response()->json([
-            'status' => 'success',
+            'success' => true,
             'data' => $validated,
         ]);
     }
