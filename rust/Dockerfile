@@ -11,16 +11,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy manifests for caching
-COPY Cargo.toml Cargo.lock ./
+COPY Cargo.toml ./
 
-# Build deps first
+# Prepare a small dummy crate so Docker can cache dependency compilation
 RUN mkdir src && echo "fn main() {}" > src/main.rs
-RUN cargo build --release && rm -rf target/release/deps/greetings_rust*
 
-# Copy actual source
+# Generate lockfile (if one isn't present) and build dependencies to cache them
+RUN cargo generate-lockfile
+RUN cargo build --release
+
+# Copy actual source and build the real binary
 COPY src ./src
-
-# Build binary
 RUN cargo build --release
 
 # ============================
