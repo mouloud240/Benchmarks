@@ -54,6 +54,28 @@ Tests JSON parsing, validation, and response generation with a POST endpoint.
 - **Load Profile**: Same as plain text test
 - **Success Criteria**: Same as plain text test
 
+## Upcoming Test Scenarios
+
+We're actively working on expanding our benchmark suite with additional real-world scenarios. The following tests will be added soon:
+
+### 🔐 JWT Authentication
+Testing authentication middleware performance with token generation, validation, and refresh operations.
+
+### 🗄️ Database Queries
+Benchmarking CRUD operations, complex joins, and ORM performance with real database interactions (PostgreSQL/MySQL).
+
+### 📁 File Uploads
+Testing multipart form data handling, file validation, and storage operations with various file sizes.
+
+### ⚙️ CPU-Bound Operations
+Testing computational performance with tasks like:
+- Image processing and resizing
+- Data encryption/decryption
+- Hash computation (bcrypt, argon2)
+- JSON serialization/deserialization of large datasets
+
+Stay tuned for these additions! Contributions are welcome.
+
 ## Prerequisites
 
 - [Docker](https://www.docker.com/) - For running framework implementations
@@ -270,7 +292,7 @@ Memory: 7814MiB / 15705MiB
 
 ### Key Findings
 
-1. **🏆 Winner: Rust (Axum)** - Fastest average and p95 response times in both scenarios
+1. **🏆 Winner: Rust (Axum)** - Fastest average and p95 response times in both scenarios, though it comes with a steeper learning curve and more complex setup compared to other frameworks
 2. **🥈 Runner-up: Golang** - Excellent performance with minimal overhead
 3. **🥉 Third Place: NestJS (Fastify)** - Best performing Node.js framework, competitive throughput
 4. **FastAPI** - Moderate performance, suitable for Python ecosystem
